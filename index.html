@@ -8,6 +8,12 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400;1,600;1,700&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap">
 <script src="https://cdn.tailwindcss.com"></script>
+<!-- Lenis Smooth Scroll -->
+<link rel="stylesheet" href="https://unpkg.com/lenis@1.1.18/dist/lenis.css">
+<script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
+<!-- GSAP & ScrollTrigger -->
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js"></script>
 <script defer src="https://cdn.jsdelivr.net/npm/alpinejs@3.x.x/dist/cdn.min.js"></script>
 <script>
 tailwind.config = {
@@ -82,6 +88,20 @@ tailwind.config = {
       gap: 1px;
     }
   }
+  /* Lenis smooth scrolling helper */
+  html.lenis, html.lenis body {
+    height: auto;
+  }
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+  .lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+  }
+  .lenis.lenis-stopped {
+    overflow: hidden;
+  }
+
   /* Media tile (Instagram 4:5 Aspect Ratio) */
   .media-tile {
     cursor: pointer;
@@ -92,13 +112,14 @@ tailwind.config = {
     border-radius: 0;
   }
   .media-tile img {
-    transition: transform 0.6s var(--ease-quiet);
+    transition: transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+    will-change: transform;
     display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
   }
-  .media-tile:hover img { transform: scale(1.05); }
+  .media-tile:hover img { transform: scale(1.03); }
   .meta-overlay {
     position: absolute; inset: 0;
     background: linear-gradient(to top, rgba(10,10,10,0.9) 0%, rgba(10,10,10,0.3) 50%, rgba(10,10,10,0) 100%);
@@ -202,23 +223,23 @@ tailwind.config = {
   <div class="max-w-[1600px] mx-auto px-5 lg:px-10 pb-16 lg:pb-24 w-full">
     <div class="grid grid-cols-12 gap-6 items-end">
       <div class="col-span-12 lg:col-span-7">
-        <div class="label-mono text-accent mb-5 lg:mb-7 tracking-widest text-xs">
+        <div class="hero-fade label-mono text-accent mb-5 lg:mb-7 tracking-widest text-xs">
           <span>FOTOGRAFI · VIDEOGRAFI · DKV</span>
         </div>
-        <h1 class="font-sans font-light text-5xl sm:text-7xl lg:text-[6.5rem] leading-[1.08] tracking-tight">
+        <h1 class="hero-fade font-sans font-light text-5xl sm:text-7xl lg:text-[6.5rem] leading-[1.08] tracking-tight">
           Merekam cerita,<br>
           <span class="font-serif italic font-normal text-soft">merawat</span>
           <span class="font-serif italic font-normal text-accent">ingatan.</span>
         </h1>
       </div>
       <div class="col-span-12 lg:col-span-5 lg:pl-6 flex flex-col justify-end">
-        <p class="text-soft text-base lg:text-lg font-light leading-relaxed max-w-lg">
+        <p class="hero-fade text-soft text-base lg:text-lg font-light leading-relaxed max-w-lg">
           Fotografer, Videografer, dan Desainer Komunikasi Visual — memadukan tangkapan kamera dan kepekaan desain untuk menyampaikan pesan visual yang bermakna.
         </p>
       </div>
     </div>
   </div>
-  <div class="absolute bottom-6 right-5 lg:right-10 label-mono text-soft flex items-center gap-3">
+  <div class="hero-fade absolute bottom-6 right-5 lg:right-10 label-mono text-soft flex items-center gap-3">
     <span>Gulir ke bawah</span>
     <span class="w-8 h-px bg-soft"></span>
   </div>
@@ -229,7 +250,7 @@ tailwind.config = {
   <div class="max-w-[1600px] mx-auto px-5 lg:px-10">
 
     <!-- Section header -->
-    <div class="grid grid-cols-12 gap-6 mb-12 lg:mb-16 fade-up">
+    <div class="grid grid-cols-12 gap-6 mb-12 lg:mb-16 scroll-reveal">
       <div class="col-span-12 lg:col-span-6">
         <div class="label-mono text-accent mb-4 tracking-widest text-xs">
           <span>01 / KARYA PILIHAN</span>
@@ -296,7 +317,7 @@ tailwind.config = {
 <section id="about" class="py-20 lg:py-32 border-t border-line-soft">
   <div class="max-w-[1600px] mx-auto px-5 lg:px-10">
     <div class="grid grid-cols-12 gap-6 lg:gap-12">
-      <div class="col-span-12 lg:col-span-5 fade-up">
+      <div class="col-span-12 lg:col-span-5 scroll-reveal">
         <div class="label-mono text-accent mb-4 tracking-widest text-xs">
           <span>02 / TENTANG</span>
         </div>
@@ -306,7 +327,7 @@ tailwind.config = {
                class="w-full h-full object-cover">
         </div>
       </div>
-      <div class="col-span-12 lg:col-span-7 lg:pl-8 flex flex-col justify-between fade-up" style="--delay: 150ms">
+      <div class="col-span-12 lg:col-span-7 lg:pl-8 flex flex-col justify-between scroll-reveal">
         <div>
           <h2 class="font-sans text-3xl lg:text-5xl font-light leading-[1.2] mb-8 tracking-tight">
             Merekam kehidupan<br>
@@ -351,7 +372,7 @@ tailwind.config = {
 <footer id="contact" class="py-20 lg:py-32 border-t border-line-soft">
   <div class="max-w-[1600px] mx-auto px-5 lg:px-10">
     <div class="grid grid-cols-12 gap-6">
-      <div class="col-span-12 lg:col-span-8 fade-up">
+      <div class="col-span-12 lg:col-span-8 scroll-reveal">
         <div class="label-mono text-accent mb-4 tracking-widest text-xs">
           <span>03 / KONTAK &amp; KOLABORASI</span>
         </div>
@@ -364,7 +385,7 @@ tailwind.config = {
           Terbuka untuk kolaborasi proyek fotografi, produksi video, dan perancangan komunikasi visual. Berbasis di Indonesia dan siap bekerja sama untuk berbagai kebutuhan kreatif.
         </p>
       </div>
-      <div class="col-span-12 lg:col-span-4 lg:pl-8 flex flex-col justify-between fade-up" style="--delay: 150ms">
+      <div class="col-span-12 lg:col-span-4 lg:pl-8 flex flex-col justify-between scroll-reveal">
         <div class="space-y-6">
           <div>
             <div class="label-mono text-soft mb-2">Email</div>
@@ -391,7 +412,7 @@ tailwind.config = {
     <div class="border-t border-line-soft mt-20 pt-8 flex flex-col md:flex-row justify-between items-start md:items-center gap-4 label-mono text-soft">
       <div>© Mirzan Maulidar. Semua hak cipta dilindungi.</div>
       <div class="flex flex-wrap gap-6">
-        <span>Banda Aceh &amp; Jakarta, Indonesia</span>
+        <span>Banda Aceh, Indonesia</span>
       </div>
     </div>
   </div>
@@ -411,7 +432,7 @@ tailwind.config = {
      style="display: none;">
 
   <!-- Close (consistent responsive circle) -->
-  <button @click="closeViewer()" 
+  <button @click="closeViewer()"
           class="fixed top-3 right-3 sm:top-6 sm:right-6 z-[110] w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/85 text-white/75 hover:text-white backdrop-blur-md border border-white/10 transition active:scale-90 cursor-pointer shadow-lg"
           title="Tutup (Esc)"
           aria-label="Tutup">
@@ -422,7 +443,7 @@ tailwind.config = {
   </button>
 
   <!-- Previous (consistent responsive circle) -->
-  <button @click.stop="prevItem()" 
+  <button @click.stop="prevItem()"
           class="fixed left-2 sm:left-6 top-1/2 -translate-y-1/2 z-[110] w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/85 text-white/75 hover:text-white backdrop-blur-md border border-white/10 transition active:scale-90 cursor-pointer shadow-lg"
           title="Sebelumnya (←)"
           aria-label="Sebelumnya">
@@ -432,7 +453,7 @@ tailwind.config = {
   </button>
 
   <!-- Next (consistent responsive circle) -->
-  <button @click.stop="nextItem()" 
+  <button @click.stop="nextItem()"
           class="fixed right-2 sm:right-6 top-1/2 -translate-y-1/2 z-[110] w-9 h-9 sm:w-12 sm:h-12 flex items-center justify-center rounded-full bg-black/60 hover:bg-black/85 text-white/75 hover:text-white backdrop-blur-md border border-white/10 transition active:scale-90 cursor-pointer shadow-lg"
           title="Berikutnya (→)"
           aria-label="Berikutnya">
@@ -457,8 +478,8 @@ tailwind.config = {
     <!-- Video (Drive preview embed with 720p resolution and expanded viewport across devices) -->
     <template x-if="currentItem.type === 'video'">
       <div class="relative flex items-center justify-center"
-           :class="isCurrentPortrait 
-                  ? 'w-[88vw] max-w-[460px] aspect-[9/16] max-h-[80vh] sm:max-h-[86vh]' 
+           :class="isCurrentPortrait
+                  ? 'w-[88vw] max-w-[460px] aspect-[9/16] max-h-[80vh] sm:max-h-[86vh]'
                   : 'w-[95vw] max-w-[1360px] aspect-video max-h-[78vh] sm:max-h-[85vh]'"
            :key="'vid-drive-' + currentItem.id">
         <iframe :src="viewerOpen ? `https://drive.google.com/file/d/${currentItem.driveId}/preview?vq=hd720` : ''"
@@ -499,18 +520,16 @@ function portfolio() {
     touchStartY: 0,
 
     items: [
-      { id: 1,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Momen Kelulusan',            location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '200',  shutter: '1/320', description: 'Dokumentasi momen kelulusan dengan senyum hangat dan penuh rasa syukur.', image: 'https://lh3.googleusercontent.com/d/1GkLE9UZZfgb9YYFt2P7EiOnEMU0Vfntw', h: 1600 },
-      { id: 2,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Potret Studio',              location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '85mm f/1.8',      iso: '100',  shutter: '1/160', description: 'Eksplorasi karakter dan ekspresi di dalam ruang studio dengan pencahayaan lembut.', image: 'https://lh3.googleusercontent.com/d/14Bqlb2hXqxKRENzNHww612-j0dZ-xshZ', h: 1600 },
-      { id: 3,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Senyum Wisuda',              location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '200',  shutter: '1/250', description: 'Kebahagiaan wisuda yang terekam apa adanya bersama kehangatan hari kelulusan.', image: 'https://lh3.googleusercontent.com/d/1zFk97L_vUP4z9fnQcuaZud741FavGnxy', h: 1600 },
-      { id: 4,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Sorot Teduh',                location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '85mm f/1.8',      iso: '400',  shutter: '1/200', description: 'Sorot mata yang tenang dan bersahaja dalam balutan cahaya alami.', image: 'https://lh3.googleusercontent.com/d/14ZNWUJuSLjEbF2gPMQhYGLEY0_Sd2pG9', h: 1600 },
-      { id: 5,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Rona Bahagia',               location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '100',  shutter: '1/160', description: 'Tawa dan ekspresi jujur yang tertangkap dalam sesi pemotretan.', image: 'https://lh3.googleusercontent.com/d/14v9DOJlSK1Kn8J4xAkzwoWoINvSdVNjQ', h: 1600 },
-      { id: 6,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Jimny',                      location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '200',  shutter: '1/250', description: 'Senyum bangga dan kelegaan setelah perjalanan panjang menempuh studi.', image: 'https://lh3.googleusercontent.com/d/1Ugt4ykvKFRjCR_EcEh64q7ECA9-CJY6L', h: 1600 },
-      { id: 7,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Hawa Burger',                location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '85mm f/1.8',      iso: '100',  shutter: '1/320', description: 'Menatap masa depan dengan tekad dan senyuman yang merekah.', image: 'https://lh3.googleusercontent.com/d/1sGG42wx5jHVKrY0_q4a_Yc8JJfsnReib', h: 1600 },
-      { id: 8,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Centaurus M100',             location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '100',  shutter: '1/200', description: 'Potret kenangan kelulusan yang diabadikan dengan keanggunan alami.', image: 'https://lh3.googleusercontent.com/d/15ZQFmsqHkUXIVXFzW35vQjza2fqWZ3mJ', h: 1600 },
-      { id: 9,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Thumbnail Langkah Baru',               location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '100',  shutter: '1/250', description: 'Potret ekspresif dengan tata cahaya studio dan detail visual yang tajam.', image: 'https://lh3.googleusercontent.com/d/12ElCX0fJBqTFDyqfczixBrTUkdaAXoQu', h: 1600 },
-      { id: 10, type: 'video', category: 'Dokumenter', orientation: 'landscape', title: 'Pelajar Duta Anti Narkoba Aceh', location: 'Banda Aceh, ID', duration: '1:15', camera: 'Sony Alpha', lens: '24-70mm f/2.8', iso: '400', shutter: '1/50', driveId: '1Z12YMfS8CDsO2m-8I4EJtvDRXM6Jiekr', image: 'https://lh3.googleusercontent.com/d/1Z12YMfS8CDsO2m-8I4EJtvDRXM6Jiekr', description: 'Dokumentasi video pemilihan dan penobatan Pelajar Duta Anti Narkoba Provinsi Aceh.', h: 900 },
-      { id: 11, type: 'video', category: 'Dokumenter', orientation: 'portrait',  title: 'Opening MJD Kopi',           location: 'Banda Aceh, ID', duration: '0:30', camera: 'Sony Alpha', lens: '35mm f/1.8',      iso: '640', shutter: '1/50', driveId: '10ocIkdc3LnaUUyiGhUiiMwkYX_E77uMK', image: 'https://lh3.googleusercontent.com/d/10ocIkdc3LnaUUyiGhUiiMwkYX_E77uMK', description: 'Sorotan video vertikal kemeriahan hari peluncuran dan pembukaan kedai MJD Kopi.', h: 1600 },
-      { id: 12, type: 'video', category: 'Potret',     orientation: 'portrait',  title: 'Wisuda Velisa Meisanda, A.Md.', location: 'Banda Aceh, ID', duration: '0:45', camera: 'Sony Alpha', lens: '50mm f/1.4',   iso: '200', shutter: '1/50', driveId: '1oB8V-A38VLS0f_Z5wm5o0ktdt1aVrSmS', image: 'https://lh3.googleusercontent.com/d/1oB8V-A38VLS0f_Z5wm5o0ktdt1aVrSmS', description: 'Dokumentasi visual sinematik perayaan kelulusan Velisa Meisanda, A.Md.', h: 1600 },
+      { id: 1,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Potret Studio',              location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '85mm f/1.8',      iso: '100',  shutter: '1/160', description: 'Eksplorasi karakter dan ekspresi di dalam ruang studio dengan pencahayaan lembut.', image: 'https://lh3.googleusercontent.com/d/14Bqlb2hXqxKRENzNHww612-j0dZ-xshZ', h: 1600 },
+      { id: 2,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Sorot Teduh',                location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '85mm f/1.8',      iso: '400',  shutter: '1/200', description: 'Sorot mata yang tenang dan bersahaja dalam balutan cahaya alami.', image: 'https://lh3.googleusercontent.com/d/14ZNWUJuSLjEbF2gPMQhYGLEY0_Sd2pG9', h: 1600 },
+      { id: 3,  type: 'photo', category: 'Potret',     orientation: 'portrait',  title: 'Rona Bahagia',               location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '100',  shutter: '1/160', description: 'Tawa dan ekspresi jujur yang tertangkap dalam sesi pemotretan.', image: 'https://lh3.googleusercontent.com/d/14v9DOJlSK1Kn8J4xAkzwoWoINvSdVNjQ', h: 1600 },
+      { id: 4,  type: 'photo', category: 'Desain',     orientation: 'portrait',  title: 'Jimny',                      location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '200',  shutter: '1/250', description: 'Senyum bangga dan kelegaan setelah perjalanan panjang menempuh studi.', image: 'https://lh3.googleusercontent.com/d/1Ugt4ykvKFRjCR_EcEh64q7ECA9-CJY6L', h: 1600 },
+      { id: 5,  type: 'photo', category: 'Desain',     orientation: 'portrait',  title: 'Hawa Burger',                location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '85mm f/1.8',      iso: '100',  shutter: '1/320', description: 'Menatap masa depan dengan tekad dan senyuman yang merekah.', image: 'https://lh3.googleusercontent.com/d/1sGG42wx5jHVKrY0_q4a_Yc8JJfsnReib', h: 1600 },
+      { id: 6,  type: 'photo', category: 'Desain',     orientation: 'portrait',  title: 'Centaurus M100',             location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '100',  shutter: '1/200', description: 'Potret kenangan kelulusan yang diabadikan dengan keanggunan alami.', image: 'https://lh3.googleusercontent.com/d/15ZQFmsqHkUXIVXFzW35vQjza2fqWZ3mJ', h: 1600 },
+      { id: 7,  type: 'photo', category: 'Desain',     orientation: 'portrait',  title: 'Thumbnail Langkah Baru',               location: 'Banda Aceh, ID', camera: 'Sony Alpha',       lens: '50mm f/1.4',      iso: '100',  shutter: '1/250', description: 'Potret ekspresif dengan tata cahaya studio dan detail visual yang tajam.', image: 'https://lh3.googleusercontent.com/d/12ElCX0fJBqTFDyqfczixBrTUkdaAXoQu', h: 1600 },
+      { id: 8, type: 'video', category: 'Dokumenter', orientation: 'landscape', title: 'Pelajar Duta Anti Narkoba Aceh', location: 'Banda Aceh, ID', duration: '1:15', camera: 'Sony Alpha', lens: '24-70mm f/2.8', iso: '400', shutter: '1/50', driveId: '1Z12YMfS8CDsO2m-8I4EJtvDRXM6Jiekr', image: 'https://lh3.googleusercontent.com/d/1Z12YMfS8CDsO2m-8I4EJtvDRXM6Jiekr', description: 'Dokumentasi video pemilihan dan penobatan Pelajar Duta Anti Narkoba Provinsi Aceh.', h: 900 },
+      { id: 9, type: 'video', category: 'Dokumenter', orientation: 'portrait',  title: 'Opening MJD Kopi',           location: 'Banda Aceh, ID', duration: '0:30', camera: 'Sony Alpha', lens: '35mm f/1.8',      iso: '640', shutter: '1/50', driveId: '10ocIkdc3LnaUUyiGhUiiMwkYX_E77uMK', image: 'https://lh3.googleusercontent.com/d/10ocIkdc3LnaUUyiGhUiiMwkYX_E77uMK', description: 'Sorotan video vertikal kemeriahan hari peluncuran dan pembukaan kedai MJD Kopi.', h: 1600 },
+      { id: 10, type: 'video', category: 'Dokumenter',     orientation: 'portrait',  title: 'Wisuda Velisa Meisanda, A.Md.', location: 'Banda Aceh, ID', duration: '0:45', camera: 'Sony Alpha', lens: '50mm f/1.4',   iso: '200', shutter: '1/50', driveId: '1oB8V-A38VLS0f_Z5wm5o0ktdt1aVrSmS', image: 'https://lh3.googleusercontent.com/d/1oB8V-A38VLS0f_Z5wm5o0ktdt1aVrSmS', description: 'Dokumentasi visual sinematik perayaan kelulusan Velisa Meisanda, A.Md.', h: 1600 },
     ],
 
     get filteredItems() {
@@ -548,11 +567,13 @@ function portfolio() {
       this.currentIndex = idx;
       this.viewerOpen = true;
       document.body.style.overflow = 'hidden';
+      if (window.lenis) window.lenis.stop();
     },
 
     closeViewer() {
       this.viewerOpen = false;
       document.body.style.overflow = '';
+      if (window.lenis) window.lenis.start();
       if (document.fullscreenElement) {
         document.exitFullscreen?.().catch(() => {});
       }
@@ -601,23 +622,85 @@ function portfolio() {
     },
 
     init() {
-      this.$nextTick(() => this.setupObservers());
+      this.initLenisAndAnimations();
       this.$watch('filter', () => {
-        this.$nextTick(() => this.setupObservers());
+        this.$nextTick(() => {
+          if (typeof ScrollTrigger !== 'undefined') ScrollTrigger.refresh();
+          if (typeof gsap !== 'undefined') {
+            gsap.fromTo('.media-tile', 
+              { opacity: 0, y: 24 }, 
+              { opacity: 1, y: 0, duration: 0.6, stagger: 0.05, ease: 'power2.out', overwrite: 'auto' }
+            );
+          }
+        });
       });
     },
 
-    setupObservers() {
-      const io = new IntersectionObserver((entries) => {
-        entries.forEach(e => {
-          if (e.isIntersecting) {
-            e.target.classList.add('is-in');
-            io.unobserve(e.target);
-          }
+    initLenisAndAnimations() {
+      // 1. Lenis Smooth Scroll
+      if (typeof Lenis !== 'undefined') {
+        window.lenis = new Lenis({
+          duration: 1.2,
+          easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+          smoothWheel: true,
+          touchMultiplier: 1.5,
         });
-      }, { rootMargin: '0px 0px -8% 0px', threshold: 0.05 });
 
-      document.querySelectorAll('.fade-up:not(.is-in)').forEach(el => io.observe(el));
+        if (typeof gsap !== 'undefined' && typeof ScrollTrigger !== 'undefined') {
+          gsap.registerPlugin(ScrollTrigger);
+          window.lenis.on('scroll', ScrollTrigger.update);
+          gsap.ticker.add((time) => {
+            window.lenis.raf(time * 1000);
+          });
+          gsap.ticker.lagSmoothing(0);
+        } else {
+          function raf(time) {
+            window.lenis.raf(time);
+            requestAnimationFrame(raf);
+          }
+          requestAnimationFrame(raf);
+        }
+      }
+
+      // 2. GSAP Entrance Animations
+      if (typeof gsap !== 'undefined') {
+        gsap.fromTo('.hero-fade', 
+          { opacity: 0, y: 35 }, 
+          { opacity: 1, y: 0, duration: 1.1, stagger: 0.15, ease: 'power3.out', delay: 0.15 }
+        );
+
+        if (typeof ScrollTrigger !== 'undefined') {
+          ScrollTrigger.batch('.media-tile', {
+            interval: 0.08,
+            batchMax: 4,
+            onEnter: (batch) => {
+              gsap.fromTo(batch, 
+                { opacity: 0, y: 35 }, 
+                { opacity: 1, y: 0, duration: 0.8, stagger: 0.08, ease: 'power2.out', overwrite: 'auto' }
+              );
+            },
+            once: true
+          });
+
+          gsap.utils.toArray('.scroll-reveal').forEach((el) => {
+            gsap.fromTo(el, 
+              { opacity: 0, y: 40 }, 
+              {
+                opacity: 1,
+                y: 0,
+                duration: 1,
+                ease: 'power3.out',
+                scrollTrigger: {
+                  trigger: el,
+                  start: 'top 88%',
+                  toggleActions: 'play none none none',
+                  once: true
+                }
+              }
+            );
+          });
+        }
+      }
     }
   }
 }
