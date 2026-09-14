@@ -223,8 +223,19 @@ tailwind.config = {
 </header>
 
 <!-- ============= HERO ============= -->
-<section class="relative hero-bg h-screen min-h-[680px] flex items-end">
-  <div class="max-w-[1600px] mx-auto px-5 lg:px-10 pb-16 lg:pb-24 w-full">
+<section class="relative h-screen min-h-[680px] flex items-end overflow-hidden">
+  <!-- Hero Background Image (Cover Mizan - Masjid Raya Baiturrahman) -->
+  <div class="absolute inset-0 z-0 select-none pointer-events-none">
+    <img src="cover%20mizan.jpeg"
+         alt="Masjid Raya Baiturrahman — Mirzan Maulidar"
+         class="w-full h-full object-cover object-[center_60%] sm:object-[center_50%] opacity-40 brightness-95 contrast-105 scale-100">
+    <!-- Cinematic gradient overlays for text contrast and seamless blending into dark theme -->
+    <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-bg/30"></div>
+    <div class="absolute inset-0 bg-gradient-to-r from-bg/90 via-bg/40 to-transparent"></div>
+    <div class="absolute inset-0 bg-black/25"></div>
+  </div>
+
+  <div class="relative z-10 max-w-[1600px] mx-auto px-5 lg:px-10 pb-16 lg:pb-24 w-full">
     <div class="grid grid-cols-12 gap-6 items-end">
       <div class="col-span-12 lg:col-span-7">
         <div class="hero-fade label-mono text-accent mb-5 lg:mb-7 tracking-widest text-xs">
@@ -243,7 +254,7 @@ tailwind.config = {
       </div>
     </div>
   </div>
-  <div class="hero-fade absolute bottom-6 right-5 lg:right-10 label-mono text-soft flex items-center gap-3">
+  <div class="hero-fade absolute bottom-6 right-5 lg:right-10 label-mono text-soft flex items-center gap-3 z-10">
     <span>Gulir ke bawah</span>
     <span class="w-8 h-px bg-soft"></span>
   </div>
@@ -397,7 +408,7 @@ tailwind.config = {
           </div>
           <div>
             <div class="label-mono text-soft mb-2">WhatsApp</div>
-            <a href="https://wa.me/6281234567890" target="_blank" class="font-mono text-base hover:text-accent transition">+62 812 3456 7890</a>
+            <a href="https://wa.me/6282241319417" target="_blank" class="font-mono text-base hover:text-accent transition">+62 822 4131 9417</a>
           </div>
           <div>
             <div class="label-mono text-soft mb-2">Domisili</div>
@@ -407,7 +418,6 @@ tailwind.config = {
 
         <div class="flex flex-wrap gap-6 label-mono mt-12">
           <a href="#" class="text-soft hover:text-accent transition">Instagram →</a>
-          <a href="#" class="text-soft hover:text-accent transition">Vimeo →</a>
           <a href="#" class="text-soft hover:text-accent transition">YouTube →</a>
         </div>
       </div>
